@@ -211,3 +211,132 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 - 목표: 코드 한줄 한줄 전체적으로 이해하기
 
 - ex) 변수인지, 클래스인지, 그 코드 한줄이 무슨 의미인지 정확하게 파악할 것.
+
+### Publiser C++
+#### 1. Publisher 노드 작성
+- 노드는 ROS 네트워크에서 실행 가능한 하나의 요소로 publisher node(talker) 생성을 통해 메시지를 계속적으로 broadcast하는 노드를 생성
+- 우선 앞의 과정에서 생성한 beginner_tutorials 패키지로 이동
+    ```bash
+    $ roscd beginner_tutorials
+    ```
+1.1 The Code
+- beginner_tutorials 패키지 경로에서 src 폴더를 생성한다.
+    ```bash
+    $ mkdir -p src
+    ```
+- 이 폴더는 beginner_tutorials 패키지의 모든 소스파일을 저장할 곳이다.
+- src/talker.cpp 파일을 생성하고 다음의 코드를 붙여넣기
+    ```cpp
+    #include "ros/ros.h"
+    #include "std_msgs/String.h"
+    
+    #include <sstream>
+    #include "ros/ros.h"
+    #include "std_msgs/String.h"
+
+    #include <sstream>
+
+    /**
+     * This tutorial demonstrates simple sending of messages over the ROS system.
+     */
+    int main(int argc, char **argv)
+    {
+      /**
+       * The ros::init() function needs to see argc and argv so that it can perform
+       * any ROS arguments and name remapping that were provided at the command line.
+       * For programmatic remappings you can use a different version of init() which takes
+       * remappings directly, but for most command-line programs, passing argc and argv is
+       * the easiest way to do it.  The third argument to init() is the name of the node.
+       *
+       * You must call one of the versions of ros::init() before using any other
+       * part of the ROS system.
+       */
+      ros::init(argc, argv, "talker");
+
+      /**
+       * NodeHandle is the main access point to communications with the ROS system.
+       * The first NodeHandle constructed will fully initialize this node, and the last
+       * NodeHandle destructed will close down the node.
+       */
+      ros::NodeHandle n;
+
+      /**
+       * The advertise() function is how you tell ROS that you want to
+       * publish on a given topic name. This invokes a call to the ROS
+       * master node, which keeps a registry of who is publishing and who
+       * is subscribing. After this advertise() call is made, the master
+       * node will notify anyone who is trying to subscribe to this topic name,
+       * and they will in turn negotiate a peer-to-peer connection with this
+       * node.  advertise() returns a Publisher object which allows you to
+       * publish messages on that topic through a call to publish().  Once
+       * all copies of the returned Publisher object are destroyed, the topic
+       * will be automatically unadvertised.
+       *
+       * The second parameter to advertise() is the size of the message queue
+       * used for publishing messages.  If messages are published more quickly
+       * than we can send them, the number here specifies how many messages to
+       * buffer up before throwing some away.
+       */
+      ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+
+      ros::Rate loop_rate(10);
+
+      /**
+       * A count of how many messages we have sent. This is used to create
+       * a unique string for each message.
+       */
+      int count = 0;
+      while (ros::ok())
+      {
+        /**
+         * This is a message object. You stuff it with data, and then publish it.
+         */
+        std_msgs::String msg;
+
+        std::stringstream ss;
+        ss << "hello world " << count;
+        msg.data = ss.str();
+
+        ROS_INFO("%s", msg.data.c_str());
+
+        /**
+         * The publish() function is how you send messages. The parameter
+         * is the message object. The type of this object must agree with the type
+         * given as a template parameter to the advertise<>() call, as was done
+         * in the constructor above.
+         */
+        chatter_pub.publish(msg);
+
+        ros::spinOnce();
+
+        loop_rate.sleep();
+        ++count;
+      }
+
+
+      return 0;
+    }
+    
+    ```
+1.2 The Code Explanlned
+    ```cpp
+    #include "ros/ros.h"
+    ```
+- ros/ros.h 는 일반적으로 ROS시스템에서 사용되는 많은 부분들에 대한 필수적인 헤더를 포함하고 있다.   
+    ```cpp
+    #include "std_msgs/String.h"
+    ```
+- std_msgs 패키지에서 사용되는 std_msgs/String 메세지를 사용하기 위한 과정으로 이는 자동으로 패키지 안의 String.msg파일을 실행하게 된다. (참고 wiki.ros.org/msg)   
+    ```cpp
+    ros::init(argc,argv,"talker");
+    ```
+- ROS를 초기화하는 과정으로 노드의 이름을 갖게되고 여기서 이름은 동작되는 시스템에서 유일하게 지정되어야한다.
+    ```cpp
+    ros::NodeHandle n;
+    ```
+- 해당 노드의 핸들러를 만든다. 처음 생성된 NodeHandle은 자동으로 노드를 초기화하고 마지막으로 제거될 때 해당 노드가 사용한 리소스를 정리(clean up)한다.
+    ```cpp
+    ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+    ```
+ 
+    
