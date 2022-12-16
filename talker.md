@@ -218,7 +218,7 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 
 - ex) 변수인지, 클래스인지, 그 코드 한줄이 무슨 의미인지 정확하게 파악할 것.
 
-### Publiser C++
+### Publiser Subscriber C++
 #### 1. Publisher 노드 작성
 - 노드는 ROS 네트워크에서 실행 가능한 하나의 요소로 publisher node(talker) 생성을 통해 메시지를 계속적으로 broadcast하는 노드를 생성
 - 우선 앞의 과정에서 생성한 beginner_tutorials 패키지로 이동
@@ -324,7 +324,7 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
     }
     
     ```
-1.2 The Code Explanlned
+1.2 The Code 
 #
     ```cpp
     #include "ros/ros.h"
@@ -404,3 +404,125 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 > A함수를 실행하고 A가 끝나든 말든 B를 시작하는 방식이다.
 > 요청했던 것의 할 일이 끝난 후 처리 결과를 콜백이라는 함수와 함께 알려준다.
 #
+
+#### 2. Subscriber 노드 작성
+2.1 The Code
+- src/listener.cpp 파일을 생성하고 아래의 내용 붙여넣기
+    ```cpp
+    #include "ros/ros.h"
+    #include "std_msgs/String.h"
+
+    /**
+     * This tutorial demonstrates simple receipt of messages over the ROS system.
+     */
+    void chatterCallback(const std_msgs::String::ConstPtr& msg)
+    {
+      ROS_INFO("I heard: [%s]", msg->data.c_str());
+    }
+
+    int main(int argc, char **argv)
+    {
+      /**
+       * The ros::init() function needs to see argc and argv so that it can perform
+       * any ROS arguments and name remapping that were provided at the command line.
+       * For programmatic remappings you can use a different version of init() which takes
+       * remappings directly, but for most command-line programs, passing argc and argv is
+       * the easiest way to do it.  The third argument to init() is the name of the node.
+       *
+       * You must call one of the versions of ros::init() before using any other
+       * part of the ROS system.
+       */
+      ros::init(argc, argv, "listener");
+
+      /**
+       * NodeHandle is the main access point to communications with the ROS system.
+       * The first NodeHandle constructed will fully initialize this node, and the last
+       * NodeHandle destructed will close down the node.
+       */
+      ros::NodeHandle n;
+
+      /**
+       * The subscribe() call is how you tell ROS that you want to receive messages
+       * on a given topic.  This invokes a call to the ROS
+       * master node, which keeps a registry of who is publishing and who
+       * is subscribing.  Messages are passed to a callback function, here
+       * called chatterCallback.  subscribe() returns a Subscriber object that you
+       * must hold on to until you want to unsubscribe.  When all copies of the Subscriber
+       * object go out of scope, this callback will automatically be unsubscribed from
+       * this topic.
+       *
+       * The second parameter to the subscribe() function is the size of the message
+       * queue.  If messages are arriving faster than they are being processed, this
+       * is the number of messages that will be buffered up before beginning to throw
+       * away the oldest ones.
+       */
+      ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+
+      /**
+       * ros::spin() will enter a loop, pumping callbacks.  With this version, all
+       * callbacks will be called from within this thread (the main one).  ros::spin()
+       * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
+       */
+      ros::spin();
+
+      return 0;
+    }
+    ```
+#
+2.2 The code 설명
+#
+
+    ```cpp
+    #include "ros/ros.h"
+    ```
+> ros/ros.h 는 일반적으로 ROS 시스템에서 사용되는 많은 부분들에 대한 필수적인 헤더를 포함하고 있다.
+#
+
+    ```cpp
+    #include "std_msgs/String.h"
+    ```
+> chatter 토픽에 대한 메시지를 subscribe한다.    
+> ROS는 새로운 메시지가 도착할때마다 chatterCallback()함수를 호출한다.    
+> 2번째 argument는 queue 크기로 queue에 1000 메시지가 가득 차게 되면 오래된 것부터 제거하게 된다.    
+#
+> NodeHandle::subscribe() 함수는 ros::Subscriber 객체를 반환하고 이는 토픽을 unsubscribe할때까지 유지되게 된다.    
+> subscribe() 함수는 메시지를 받아 callback함수에 전달하게 되고 즉 전달받은 메시지를 통해 callbakc함수가 실행되어 처리되게 된다.
+#
+
+    ```cpp
+    ros::spin();
+    ```
+> 반복적인 subscribe를 수행하고 callback을 지속적으로 요청한다. publisher의 경우 주기를 사용자가 지정하여 지정된 간격으로 메시지를 보내지만 subscriber는 메시지가 오는 즉시 callback을 요청하고 바로 그 다음 메시지를 기다린다.
+#
+#### 3. 노드 빌드하기
+- CMakeLists.txt 파일을 수정
+- CMakeLists.txt 파일에는 패키지 빌드와 catkin에 관련된 설정 정보가 포함되어 있다.
+- catkin 버전, file include경로, 노드 리스트, 라이브러리 의존성 등이 작성되어 있다.
+    ```txt
+    cmake_minimum_required(VERSION 2.8.3)
+    project(beginner_tutorials)
+
+    ## Find catkin and any catkin packages
+    find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
+
+    ## Declare ROS messages and services
+    add_message_files(FILES Num.msg)
+    add_service_files(FILES AddTwoInts.srv)
+
+    ## Generate added messages and services
+    generate_messages(DEPENDENCIES std_msgs)
+
+    ## Declare a catkin package
+    catkin_package()
+
+    ## Build talker and listener
+    include_directories(include ${catkin_INCLUDE_DIRS})
+
+    add_executable(talker src/talker.cpp)
+    target_link_libraries(talker ${catkin_LIBRARIES})
+    add_dependencies(talker beginner_tutorials_generate_messages_cpp)
+
+    add_executable(listener src/listener.cpp)
+    target_link_libraries(listener ${catkin_LIBRARIES})
+    add_dependencies(listener beginner_tutorials_generate_messages_cpp)
+    ```
