@@ -127,7 +127,7 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
    ```bash
    $ catkin_make
    ```
-4. make를 하고 나면 /opt/ros/melodic에서 볼 수 있는 것과 같이 devel 하위 디렉터리에 유사한 구조가 생성, 작업 공간을 ROS 환경에 추가하려면 devel내의 setup.bash 파일을 source 시켜주어야 함
+4. make를 하고 나면 /opt/ros/noetic에서 볼 수 있는 것과 같이 devel 하위 디렉터리에 유사한 구조가 생성, 작업 공간을 ROS 환경에 추가하려면 devel내의 setup.bash 파일을 source 시켜주어야 함
    ```bash
    $ source ~/catkin_ws/devel/setup.bash
    ```
@@ -189,6 +189,11 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 - 정보를 기반으로 서브스크라이버 노드는 퍼블리셔 노드와 직접 접속하여 메시지를 받는다.
 - 서브스크라이버는 이를 실행하는 개체로서 노드에서 선언한다.
 - 서브스크라이버는 하나의 노드에서 복수로 선언할 수 있다.
+- 퍼블리시와 서브스크라이브 개념의 토픽 통신 방식은 비동기 방식일 필요에 따라서 주어진 데이터를 전송하고 받기에 매우 훌륭한 방법이다.
+- 한 번의 접속으로 지속적인 메시지의 송수신하기 때문에 지속해서 메시지를 발송해야 하는 센서 데이터에 적합하여 많이 사용된다.
+- 하지만 때에 따라서는 요청과 있을 때 응답하는 서비스 서버와 요청하고 응답받는 서비스 클라이언트로 나눈다.
+- 서비스는 토픽과는 달리 일회성 메시지 통신이다.
+- 서비스의 요청과 응답이 완료되면 연결된 두 노드의 접속은 끊긴다.
 #### 9. 서비스
 - 서비스(service) 메시지 통신은 특정 목적의 작업에 해당되는 서비스를 요청하는 서비스 클라이언트와 서비스 응답을 담당하는 서비스 서버간의 동기적 양방향 서비스 메시지 통신을 말한다.
 #### 10. 서비스 서버
@@ -339,5 +344,8 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
     ```cpp
     ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
     ```
- 
+Topic "chatter"에 대한 std_msgs/String 타입의 메시지를 publish할 것을 Master에게 알리게 된다.
+Master는 chatter을 subscribe하기 원하는 노드를 찾아 이 둘이 직접 연결되게 한다.
+두번째 argument는 publish queue의 크기를 지정하게 된다.
+만약 publishing이 너무 빠르게 되면 이전의 메시지를 버리기 전에 지정된 버퍼 1000을 새롭게 채우는 문제가 발생할 수 있
     
