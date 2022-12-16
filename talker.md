@@ -326,27 +326,27 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
     ```
 1.2 The Code 
 #
-    ```cpp
+    ```c
     #include "ros/ros.h"
     ```
 > ros/ros.h 는 일반적으로 ROS시스템에서 사용되는 많은 부분들에 대한 필수적인 헤더를 포함하고 있다.   
 #
-    ```cpp
+    ```c
     #include "std_msgs/String.h"
     ```
 > std_msgs 패키지에서 사용되는 std_msgs/String 메세지를 사용하기 위한 과정으로 이는 자동으로 패키지 안의 String.msg파일을 실행하게 된다. (참고 wiki.ros.org/msg)   
 #    
-    ```cpp
+    ```c
     ros::init(argc,argv,"talker");
     ```
 > ROS를 초기화하는 과정으로 노드의 이름을 갖게되고 여기서 이름은 동작되는 시스템에서 유일하게 지정되어야한다.
 #    
-    ```cpp
+    ```c
     ros::NodeHandle n;
     ```
 > 해당 노드의 핸들러를 만든다. 처음 생성된 NodeHandle은 자동으로 노드를 초기화하고 마지막으로 제거될 때 해당 노드가 사용한 리소스를 정리(clean up)한다.
 #    
-    ```cpp
+    ```c
     ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
     ```
 > Topic "chatter"에 대한 std_msgs/String 타입의 메시지를 publish할 것을 Master에게 알리게 된다.    
@@ -357,13 +357,13 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 > 위의 코드를 통해 chatter_pub이라는 이름의 ros::publisher 객체를 생성하고 advertise()는 해당 토픽으로 publish 가능한 객체인 ros::Publisher 클래스를 반환하며    
 > 그 객체의 publish()를 이용하여 원하는 메시지를 발행할 수 있다.    
 #    
-    ```cpp
+    ```c
     ros::Rate loop_rate(10);
     ```
 > ros::Rate 객체는 반복하고자하는 주기를 설정하게 된다.    
 > 위의 경우 10Hz로 반복하게되고 하단의 Rate::sleep()을 통해 지정된 시간을 지키기위해 sleep을 수행한다.
 #
-    ```cpp
+    ```c
     int count = 0;
     while (ros::ok())
     {
@@ -375,7 +375,7 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 - 모든 ros::NodeHandles가 종료된 경우
 > ros::ok() 가 한번 False를 반환하면 다시 ROS를 사용할 수 없다.
 #
-    ```cpp
+    ```c
     std_msgs::String msg;
     std::stringstream ss;
     ss << "hello world" << count;
@@ -384,17 +384,17 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 > msg 파일을 통해 실행된 messge-adaoted class를 통해 ROS에서 메시지를 broadcasting한다.    
 > 더 복잡한 형태의 데이터타입도 가능하지만 "data" 멤버를 갖는 표준적인 String 메시지를 사용한다.
 #
-    ```cpp
+    ```c
     chatter_pub.publishing(msg);
     ```
 > 연결된 노드에게 실질적인 broadcast를 실행한다.
 #
-    ```cpp
+    ```c
     ROS_INFO("%s", msg.data.c_str());
     ```
 > ROS_INFO는 출력을 담당한다.
 #
-    ```cpp
+    ```c
     ros::spinOnce();
     ```
 > __callback__ 을 받지 않으므로 필수적인 요소는 아니다.
@@ -471,14 +471,12 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 #
 2.2 The code 설명
 #
-
-    ```cpp
+    ```c
     #include "ros/ros.h"
     ```
 > ros/ros.h 는 일반적으로 ROS 시스템에서 사용되는 많은 부분들에 대한 필수적인 헤더를 포함하고 있다.
 #
-
-    ```cpp
+    ```c
     #include "std_msgs/String.h"
     ```
 > chatter 토픽에 대한 메시지를 subscribe한다.    
@@ -488,16 +486,17 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
 > NodeHandle::subscribe() 함수는 ros::Subscriber 객체를 반환하고 이는 토픽을 unsubscribe할때까지 유지되게 된다.    
 > subscribe() 함수는 메시지를 받아 callback함수에 전달하게 되고 즉 전달받은 메시지를 통해 callbakc함수가 실행되어 처리되게 된다.
 #
-
-    ```cpp
+    ```c
     ros::spin();
     ```
 > 반복적인 subscribe를 수행하고 callback을 지속적으로 요청한다. publisher의 경우 주기를 사용자가 지정하여 지정된 간격으로 메시지를 보내지만 subscriber는 메시지가 오는 즉시 callback을 요청하고 바로 그 다음 메시지를 기다린다.
 #
+
 #### 3. 노드 빌드하기
 - CMakeLists.txt 파일을 수정
 - CMakeLists.txt 파일에는 패키지 빌드와 catkin에 관련된 설정 정보가 포함되어 있다.
 - catkin 버전, file include경로, 노드 리스트, 라이브러리 의존성 등이 작성되어 있다.
+    
     ```txt
     cmake_minimum_required(VERSION 2.8.3)
     project(beginner_tutorials)
