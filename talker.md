@@ -325,27 +325,82 @@ CMakeList.txt는 cmake 및 catkin_make를 하기 위해 참조하는 텍스트 �
     
     ```
 1.2 The Code Explanlned
+#
     ```cpp
     #include "ros/ros.h"
     ```
-- ros/ros.h 는 일반적으로 ROS시스템에서 사용되는 많은 부분들에 대한 필수적인 헤더를 포함하고 있다.   
+> ros/ros.h 는 일반적으로 ROS시스템에서 사용되는 많은 부분들에 대한 필수적인 헤더를 포함하고 있다.   
+#
     ```cpp
     #include "std_msgs/String.h"
     ```
-- std_msgs 패키지에서 사용되는 std_msgs/String 메세지를 사용하기 위한 과정으로 이는 자동으로 패키지 안의 String.msg파일을 실행하게 된다. (참고 wiki.ros.org/msg)   
+> std_msgs 패키지에서 사용되는 std_msgs/String 메세지를 사용하기 위한 과정으로 이는 자동으로 패키지 안의 String.msg파일을 실행하게 된다. (참고 wiki.ros.org/msg)   
+#    
     ```cpp
     ros::init(argc,argv,"talker");
     ```
-- ROS를 초기화하는 과정으로 노드의 이름을 갖게되고 여기서 이름은 동작되는 시스템에서 유일하게 지정되어야한다.
+> ROS를 초기화하는 과정으로 노드의 이름을 갖게되고 여기서 이름은 동작되는 시스템에서 유일하게 지정되어야한다.
+#    
     ```cpp
     ros::NodeHandle n;
     ```
-- 해당 노드의 핸들러를 만든다. 처음 생성된 NodeHandle은 자동으로 노드를 초기화하고 마지막으로 제거될 때 해당 노드가 사용한 리소스를 정리(clean up)한다.
+> 해당 노드의 핸들러를 만든다. 처음 생성된 NodeHandle은 자동으로 노드를 초기화하고 마지막으로 제거될 때 해당 노드가 사용한 리소스를 정리(clean up)한다.
+#    
     ```cpp
     ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
     ```
-Topic "chatter"에 대한 std_msgs/String 타입의 메시지를 publish할 것을 Master에게 알리게 된다.
-Master는 chatter을 subscribe하기 원하는 노드를 찾아 이 둘이 직접 연결되게 한다.
-두번째 argument는 publish queue의 크기를 지정하게 된다.
-만약 publishing이 너무 빠르게 되면 이전의 메시지를 버리기 전에 지정된 버퍼 1000을 새롭게 채우는 문제가 발생할 수 있
+> Topic "chatter"에 대한 std_msgs/String 타입의 메시지를 publish할 것을 Master에게 알리게 된다.    
+> Master는 chatter을 subscribe하기 원하는 노드를 찾아 이 둘이 직접 연결되게 한다.    
+> 두번째 argument는 publish queue의 크기를 지정하게 된다.    
+> 만약 publishing이 너무 빠르게 되면 이전의 메시지를 버리기 전에 지정된 버퍼 1000을 새롭게 채우는 문제가 발생할 수 있다.
     
+> 위의 코드를 통해 chatter_pub이라는 이름의 ros::publisher 객체를 생성하고 advertise()는 해당 토픽으로 publish 가능한 객체인 ros::Publisher 클래스를 반환하며    
+> 그 객체의 publish()를 이용하여 원하는 메시지를 발행할 수 있다.    
+#    
+    ```cpp
+    ros::Rate loop_rate(10);
+    ```
+> ros::Rate 객체는 반복하고자하는 주기를 설정하게 된다.    
+> 위의 경우 10Hz로 반복하게되고 하단의 Rate::sleep()을 통해 지정된 시간을 지키기위해 sleep을 수행한다.
+#
+    ```cpp
+    int count = 0;
+    while (ros::ok())
+    {
+    ```
+> ros::ok()가 False가 될 경우는 아래와 같다.
+- Ctrl+C의 입력을 받았을 경우
+- 동일한 이름의 다른 노드로 인해 충돌이 발생한 경우
+- 다른 부분에서 ros::shutdown()이 호출된 경우
+- 모든 ros::NodeHandles가 종료된 경우
+> ros::ok() 가 한번 False를 반환하면 다시 ROS를 사용할 수 없다.
+#
+    ```cpp
+    std_msgs::String msg;
+    std::stringstream ss;
+    ss << "hello world" << count;
+    msg.data = ss.str();
+    ```
+> msg 파일을 통해 실행된 messge-adaoted class를 통해 ROS에서 메시지를 broadcasting한다.    
+> 더 복잡한 형태의 데이터타입도 가능하지만 "data" 멤버를 갖는 표준적인 String 메시지를 사용한다.
+#
+    ```cpp
+    chatter_pub.publishing(msg);
+    ```
+> 연결된 노드에게 실질적인 broadcast를 실행한다.
+#
+    ```cpp
+    ROS_INFO("%s", msg.data.c_str());
+    ```
+> ROS_INFO는 출력을 담당한다.
+#
+    ```cpp
+    ros::spinOnce();
+    ```
+> __callback__ 을 받지 않으므로 필수적인 요소는 아니다.
+> 이는 큐에 요청된 콜백함수를 처리하게 된다.
+> ROS는 여러개의 노드가 비동기 환경에서 작동하는 운영체제이다.
+> 비동기 방식의 경우 어떤 작업을 실행시키고 결과와 상관없이 다음 작업을 수행하게 된다.
+> A함수를 실행하고 A가 끝나든 말든 B를 시작하는 방식이다.
+> 요청했던 것의 할 일이 끝난 후 처리 결과를 콜백이라는 함수와 함께 알려준다.
+#
