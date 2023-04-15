@@ -4,10 +4,10 @@
 #include <tf/transform_datatypes.h>
 #include <geometry_msgs/PointStamped.h>
 
-std::string target_frame = std::string("base_link");
-std::string source_topic = std::string("scan1");
-std::string output_topic = std::string("tf_scan");
-std::string source_frame = std::string("laser_g6");
+std::string target_frame = "base_link";
+std::string source_topic = "scan1";
+std::string output_topic = "tf_scan";
+std::string source_frame = "laser_g6";
 
 ros::Publisher scan_pub;
 
@@ -17,8 +17,7 @@ struct lidar_point
     float theta;
 };
 
-void tf_point(lidar_point& p_point, 
-    std::string frame_id, tf::Stamped<tf::Point>& st_point)
+void tf_point(lidar_point& p_point, std::string frame_id, tf::Stamped<tf::Point>& st_point)
 {
     float x,y,z;
     x = p_point.r*cos(p_point.theta);
@@ -42,8 +41,10 @@ void callback(const sensor_msgs::LaserScan& original_msg)
 {
     if(source_frame.compare(original_msg.header.frame_id) != 0)
     {
+        ROS_WARN("Skipping scan, frame mismatch (%s vs. %s)", source_frame.c_str(), original_msg.header.frame_id.c_str());
         return;
     } 
+    
     float o_t_min, o_t_max, o_t_inc;
     o_t_min = original_msg.angle_min;
     o_t_max = original_msg.angle_max;
@@ -53,6 +54,10 @@ void callback(const sensor_msgs::LaserScan& original_msg)
     sensor_msgs::LaserScan new_msg;
     tf::TransformListener transformer;
 
+    new_msg.ranges.resize(num_points);
+    new_msg.intensities.resize(num_points);
+
+
     for(int i=0; i<num_points; i++)
     {
         float theta = o_t_min+i*o_t_inc;
@@ -60,25 +65,30 @@ void callback(const sensor_msgs::LaserScan& original_msg)
         lidar_point point;
         point.r = r;
         point.theta = theta;
+
         tf::Stamped<tf::Point> old_point;
         tf_point(point, original_msg.header.frame_id, old_point);
+        
         tf::Stamped<tf::Point> st_point;
         geometry_msgs::PointStamped old_g_point;
         geometry_msgs::PointStamped st_g_point;
+
         tf::pointStampedTFToMsg(old_point, old_g_point);
-        tf::pointStampedTFToMsg(st_point, st_g_point);
         try{
-            transformer.transformPoint(target_frame,
-                 old_g_point, st_g_point);
+            transformer.transformPoint(target_frame, old_g_point, st_g_point);
         }
         catch(tf::TransformException ex)
         {
+            ROS_WARN("Skipping point, transform unavailable: %s", ex.what());
             continue;
         }
         tf::pointStampedMsgToTF(st_g_point, st_point);
         st_point_to_point(st_point, point);
         
         new_msg.ranges[i] = point.r;
+        new_msg.intensities[i] = original_msg.intensities[i];
+        
+        new_msg.ranges[i] = point.theta;
         if(i == 0)
         {
             new_msg.angle_min = point.theta;
@@ -99,20 +109,17 @@ void callback(const sensor_msgs::LaserScan& original_msg)
     new_msg.scan_time = original_msg.scan_time;
     new_msg.intensities = original_msg.intensities;
     scan_pub.publish(new_msg);
-    
-    
 }
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "laserscan_tranform");
-    ros::NodeHandle n;
+    ros::init(argc, argv, "laserscan_tf");
+    ros::NodeHandle nh;
 
-    ros::Subscriber sub = n.subscribe("/scan1", 100, callback);
-    scan_pub = n.advertise<sensor_msgs::LaserScan>("/tf_scan", 100);
+    ros::Subscriber sub = nh.subscribe("/scan1", 1000, callback);
+    scan_pub = nh.advertise<sensor_msgs::LaserScan>("/tf_scan", 1000);
 
     ros::spin();
 
     return 0;
 }
-// test
