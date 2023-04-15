@@ -15,13 +15,13 @@ std::string source_frame = std::string("laser_g6");
 
 ros::Publisher scan_pub;
 
-struct polar_point 
+struct lidar_point 
 {
     float r;
     float theta;
 };
 
-void polar_to_tf_point(polar_point& p_point, 
+void tf_point(lidar_point& p_point, 
     std::string frame_id, tf::Stamped<tf::Point>& st_point)
 {
     float x,y,z;
@@ -32,7 +32,7 @@ void polar_to_tf_point(polar_point& p_point,
     st_point = tf::Stamped<tf::Point>(point, ros::Time::now(), frame_id);
 }
 
-void st_point_to_polar_point(tf::Stamped<tf::Point>& st_point, polar_point& point)
+void st_point_to_point(tf::Stamped<tf::Point>& st_point, lidar_point& point)
 {
     float x = st_point.getX();
     float y = st_point.getY();
@@ -61,11 +61,11 @@ void callback(const sensor_msgs::LaserScan& original_msg)
     {
         float theta = o_t_min+i*o_t_inc;
         float r = original_msg.ranges[i];
-        polar_point point;
+        lidar_point point;
         point.r = r;
         point.theta = theta;
         tf::Stamped<tf::Point> old_point;
-        polar_to_tf_point(point, original_msg.header.frame_id, old_point);
+        tf_point(point, original_msg.header.frame_id, old_point);
         tf::Stamped<tf::Point> st_point;
         geometry_msgs::PointStamped old_g_point;
         geometry_msgs::PointStamped st_g_point;
@@ -80,7 +80,7 @@ void callback(const sensor_msgs::LaserScan& original_msg)
             continue;
         }
         tf::pointStampedMsgToTF(st_g_point, st_point);
-        st_point_to_polar_point(st_point, point);
+        st_point_to_point(st_point, point);
         
         new_msg.ranges[i] = point.r;
         if(i == 0)
