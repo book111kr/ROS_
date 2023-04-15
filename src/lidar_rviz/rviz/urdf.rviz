@@ -9,7 +9,6 @@ Panels:
         - /LaserScan1
         - /LaserScan2
         - /LaserScan3
-        - /LaserScan3/Status1
       Splitter Ratio: 0.5
     Tree Height: 483
   - Class: rviz/Selection
@@ -212,7 +211,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.4042134284973145
+      Distance: 2.506737470626831
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -220,9 +219,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.0414368212223053
-        Y: -0.10659164935350418
-        Z: -0.004769451450556517
+        X: -0.09916286170482635
+        Y: 0.08543049544095993
+        Z: -0.0018389665056020021
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -230,7 +229,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.509796380996704
       Target Frame: <Fixed Frame>
-      Yaw: 0.050388652831315994
+      Yaw: 3.150388240814209
     Saved: ~
 Window Geometry:
   Displays:
@@ -250,5 +249,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1866
-  X: 383
-  Y: 144
+  X: 312
+  Y: 167
