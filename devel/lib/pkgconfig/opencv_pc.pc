@@ -1,0 +1,8 @@
+prefix=/home/cona2/catkin_ws/devel
+
+Name: opencv_pc
+Description: Description of opencv_pc
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
