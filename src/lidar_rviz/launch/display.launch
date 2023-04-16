@@ -7,7 +7,7 @@
   <include file="$(find ydlidar_ros_driver)/launch/G2.launch"/>
   <include file="$(find ydlidar_ros_driver)/launch/G6_G7.launch"/>
   <node name="cam_data" pkg="opencv_cam" type="cam_data_msgs" args="/dev/my_astra"/>
-  <node name="tf_sp" pkg="lidar_rviz" type="tf_sp" args="-d ($find lidar_rviz)/src/tf_sp.cpp"/>
+  <node name="parser" pkg="lidar_rviz" type="parser" args="-d ($find lidar_rviz)/src/parser.cpp"/>
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lidar_rviz)/rviz/urdf.rviz"/>
    
 </launch>

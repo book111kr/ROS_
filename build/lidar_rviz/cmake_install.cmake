@@ -37,3 +37,18 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cona2/catkin_ws/build/lidar_rviz/catkin_generated/installspace/lidar_rviz.pc")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/lidar_rviz/cmake" TYPE FILE FILES
+    "/home/cona2/catkin_ws/build/lidar_rviz/catkin_generated/installspace/lidar_rvizConfig.cmake"
+    "/home/cona2/catkin_ws/build/lidar_rviz/catkin_generated/installspace/lidar_rvizConfig-version.cmake"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/lidar_rviz" TYPE FILE FILES "/home/cona2/catkin_ws/src/lidar_rviz/package.xml")
+endif()
+

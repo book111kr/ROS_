@@ -636,17 +636,17 @@ opencv_sub/fast:
 .PHONY : opencv_sub/fast
 
 #=============================================================================
-# Target rules for targets named tf_sp
+# Target rules for targets named parser
 
 # Build rule for target.
-tf_sp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf_sp
-.PHONY : tf_sp
+parser: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 parser
+.PHONY : parser
 
 # fast build rule for target.
-tf_sp/fast:
-	$(MAKE) -f lidar_rviz/CMakeFiles/tf_sp.dir/build.make lidar_rviz/CMakeFiles/tf_sp.dir/build
-.PHONY : tf_sp/fast
+parser/fast:
+	$(MAKE) -f lidar_rviz/CMakeFiles/parser.dir/build.make lidar_rviz/CMakeFiles/parser.dir/build
+.PHONY : parser/fast
 
 #=============================================================================
 # Target rules for targets named topic_tools_generate_messages_py
@@ -1685,7 +1685,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... opencv_sub"
-	@echo "... tf_sp"
+	@echo "... parser"
 	@echo "... topic_tools_generate_messages_py"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_lisp"
