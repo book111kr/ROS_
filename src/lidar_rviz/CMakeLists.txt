@@ -11,8 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   laser_geometry
   pcl_conversions
   pcl_ros
-  tf2
-  tf2_ros
+  tf
+  # tf2_ros
 )
 
 include_directories(
@@ -20,7 +20,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
 )
-link_directories(/path/to/tf2/libraries)
+# link_directories(/path/to/tf2/libraries)
 
 add_executable(tf_sp src/tf_sp.cpp)
-target_link_libraries(tf_sp ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES} ${pcl_ros_LIBRARIES} tf2 tf2_ros)
+target_link_libraries(tf_sp ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES} ${pcl_ros_LIBRARIES})

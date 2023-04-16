@@ -1,2 +1,2 @@
-lidar_rviz:opencv_cam:opencv_pc:ydlidar_ros_driver
--DCATKIN_DEVEL_PREFIX=/home/cona2/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/cona2/catkin_ws/install -G Unix Makefiles
+lidar_rviz:opencv_cam:opencv_pc
+-DCATKIN_DEVEL_PREFIX=/home/cona/ROS_/devel -DCMAKE_INSTALL_PREFIX=/home/cona/ROS_/install -G Unix Makefiles

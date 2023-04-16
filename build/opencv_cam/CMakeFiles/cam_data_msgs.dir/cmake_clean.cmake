@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/cona2/catkin_ws/devel/lib/opencv_cam/cam_data_msgs"
-  "/home/cona2/catkin_ws/devel/lib/opencv_cam/cam_data_msgs.pdb"
+  "/home/cona/ROS_/devel/lib/opencv_cam/cam_data_msgs"
+  "/home/cona/ROS_/devel/lib/opencv_cam/cam_data_msgs.pdb"
   "CMakeFiles/cam_data_msgs.dir/src/cam_pub.cpp.o"
 )
 
