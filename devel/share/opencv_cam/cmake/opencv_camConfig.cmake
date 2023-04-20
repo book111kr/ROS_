@@ -67,14 +67,14 @@ set(opencv_cam_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(opencv_cam_SOURCE_PREFIX /home/cona2/catkin_ws/src/opencv_cam)
-  set(opencv_cam_DEVEL_PREFIX /home/cona2/catkin_ws/devel)
+  set(opencv_cam_SOURCE_PREFIX /home/cona/ROS_/src/opencv_cam)
+  set(opencv_cam_DEVEL_PREFIX /home/cona/ROS_/devel)
   set(opencv_cam_INSTALL_PREFIX "")
   set(opencv_cam_PREFIX ${opencv_cam_DEVEL_PREFIX})
 else()
   set(opencv_cam_SOURCE_PREFIX "")
   set(opencv_cam_DEVEL_PREFIX "")
-  set(opencv_cam_INSTALL_PREFIX /home/cona2/catkin_ws/install)
+  set(opencv_cam_INSTALL_PREFIX /home/cona/ROS_/install)
   set(opencv_cam_PREFIX ${opencv_cam_INSTALL_PREFIX})
 endif()
 
@@ -110,7 +110,7 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'opencv_cam' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'opencv_cam' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/cona2/catkin_ws/src/opencv_cam/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'opencv_cam' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/cona/ROS_/src/opencv_cam/${idir}'.  ${_report}")
     endif()
     _list_append_unique(opencv_cam_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,11 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
+<<<<<<< HEAD
     foreach(path /home/cona2/catkin_ws/devel/lib;/home/cona2/catkin_ws/devel/lib;/opt/ros/noetic/lib)
+=======
+    foreach(path /home/cona/ROS_/devel/lib;/opt/ros/noetic/lib)
+>>>>>>> 6ef40e22e227413384e8b51b55965cae101f30bb
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

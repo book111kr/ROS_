@@ -1,4 +1,4 @@
-prefix=/home/cona2/catkin_ws/devel
+prefix=/home/cona/ROS_/devel
 
 Name: opencv_pc
 Description: Description of opencv_pc
