@@ -8,11 +8,12 @@ void draw_random_points(cv::Mat& image, int num_points) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::normal_distribution<double> dis_x(500, 700); 
-    std::normal_distribution<double> dis_y(0, 1); 
+    std::normal_distribution<double> dis_y(500, 700); 
    
     for (int i = 0; i < num_points; i++) {
         int x = (int) dis_x(gen);
-        int y = (int) (dis_y(gen) * 100 + 500);
+        int y = (int) dis_y(gen);
+        // int y = (int) (dis_y(gen) * 100 + 500);
         cv::circle(image, cv::Point(x, y), 1, cv::Scalar(255, 255, 255), -1);
     }
 }                             
@@ -20,17 +21,18 @@ void draw_random_points(cv::Mat& image, int num_points) {
 float distance(float x, float y, float vx, float vy, float x0, float y0) {
     float dx = x - x0;
     float dy = y - y0;
-    return std::abs(dx*vy - dy*vx) / std::sqrt(vx*vx + vy*vy);
+    return std::fabs(dx*vy - dy*vx) / std::sqrt(vx*vx + vy*vy);
 }
 
-// // 두 점 사이의 거리 계산 함수
-// float distance(float x1, float y1, float x2, float y2) {
-//     float dx = x2 - x1;
-//     float dy = y2 - y1;
-//     return std::sqrt(dx*dx + dy*dy);
-// }
+// 두 점 사이의 거리 계산 함수
+float distance(float x1, float y1, float x2, float y2) {
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    return std::sqrt(dx*dx + dy*dy);
+}
 
 std::vector<float> ransac_line_fitting(std::vector<float> points, cv::Mat& image, float threshold, int H) {
+    cv::Mat a;
     int num_points = points.size();
     int best_support = 0;
     std::vector<float> best_line;
@@ -73,18 +75,13 @@ std::vector<float> ransac_line_fitting(std::vector<float> points, cv::Mat& image
                 if (d < threshold) {
                     points[i] = x1 + (x - x1)*vx + (y - y1)*vy;
                     points[i+1] = y1 + (x - x1)*vy - (y - y1)*vx;
-                }   
+                }
+                cv::circle(image, cv::Point(x, y), 1, cv::Scalar(0, 0, 255), -1);   
             }
         }
     }
-
-    // 라인 그려야해.. 생각을 해보자
-    float x1 = 0;
-    float y1 = best_line[3];
-    float x2 = 1000;
-    float y2 = best_line[3] + (x2 - best_line[2]) * best_line[1] / best_line[0];
-    cv::line(image, cv::Point(x1, y1), cv::Point(x2, y2), cv::Scalar(0, 0, 255), 2, cv::LINE_AA);
-    return best_line;
+    return a;
+   
 }
 
 int main(int argc, char** argv){
@@ -92,7 +89,7 @@ int main(int argc, char** argv){
     
     cv::Mat image(1000, 1000, CV_8UC3, cv::Scalar(0, 0, 0));
     
-    draw_random_points(image, 15);
+    draw_random_points(image, 150);
     
     cv::imshow("Random Points", image);
     cv::waitKey(0);
