@@ -7,5 +7,4 @@
 subdirs("gtest")
 subdirs("opencv_cam")
 subdirs("opencv_pc")
-subdirs("lidar_rviz")
 subdirs("ydlidar_ros_driver")

@@ -133,7 +133,6 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/cona2/catkin_ws/build/gtest/cmake_install.cmake")
   include("/home/cona2/catkin_ws/build/opencv_cam/cmake_install.cmake")
   include("/home/cona2/catkin_ws/build/opencv_pc/cmake_install.cmake")
-  include("/home/cona2/catkin_ws/build/lidar_rviz/cmake_install.cmake")
   include("/home/cona2/catkin_ws/build/ydlidar_ros_driver/cmake_install.cmake")
 
 endif()

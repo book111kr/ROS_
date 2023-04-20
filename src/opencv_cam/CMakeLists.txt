@@ -130,8 +130,8 @@ include_directories(
 #   src/${PROJECT_NAME}/opencv_cam.cpp
 # )
 
-add_executable(cam_data_msgs src/cam_pub.cpp)
-target_link_libraries(cam_data_msgs ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+add_executable(RANSAC src/RANSAC.cpp)
+target_link_libraries(RANSAC ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
