@@ -4,11 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-<<<<<<< HEAD:build/opencv_cam/CMakeFiles/RANSAC.dir/DependInfo.cmake
   "/home/cona2/catkin_ws/src/opencv_cam/src/RANSAC.cpp" "/home/cona2/catkin_ws/build/opencv_cam/CMakeFiles/RANSAC.dir/src/RANSAC.cpp.o"
-=======
-  "/home/cona/ROS_/src/lidar_rviz/src/tf_sp.cpp" "/home/cona/ROS_/build/lidar_rviz/CMakeFiles/tf_sp.dir/src/tf_sp.cpp.o"
->>>>>>> 6ef40e22e227413384e8b51b55965cae101f30bb:build/lidar_rviz/CMakeFiles/tf_sp.dir/DependInfo.cmake
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

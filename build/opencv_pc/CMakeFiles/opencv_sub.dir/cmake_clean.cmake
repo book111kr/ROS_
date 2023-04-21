@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/cona/ROS_/devel/lib/opencv_pc/opencv_sub"
-  "/home/cona/ROS_/devel/lib/opencv_pc/opencv_sub.pdb"
+  "/home/cona2/catkin_ws/devel/lib/opencv_pc/opencv_sub"
+  "/home/cona2/catkin_ws/devel/lib/opencv_pc/opencv_sub.pdb"
   "CMakeFiles/opencv_sub.dir/src/cam_sub.cpp.o"
 )
 

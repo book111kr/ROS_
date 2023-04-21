@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "opencv_cam"
-PROJECT_SPACE_DIR = "/home/cona/ROS_/devel"
+PROJECT_SPACE_DIR = "/home/cona2/catkin_ws/devel"
 PROJECT_VERSION = "0.0.0"

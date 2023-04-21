@@ -7,13 +7,7 @@
 # new environment variables
 
 # modified environment variables
-<<<<<<< HEAD
+export CMAKE_PREFIX_PATH="/home/cona2/catkin_ws/devel:$CMAKE_PREFIX_PATH"
 export PWD='/home/cona2/catkin_ws/build'
-=======
-export CMAKE_PREFIX_PATH="/home/cona/ROS_/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/cona/ROS_/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/cona/ROS_/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PWD='/home/cona/ROS_/build'
-export ROSLISP_PACKAGE_DIRECTORIES='/home/cona/ROS_/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/cona/ROS_/src:$ROS_PACKAGE_PATH"
->>>>>>> 6ef40e22e227413384e8b51b55965cae101f30bb
+export ROSLISP_PACKAGE_DIRECTORIES='/home/cona2/catkin_ws/devel/share/common-lisp'
+export ROS_PACKAGE_PATH="/home/cona2/catkin_ws/src:$ROS_PACKAGE_PATH"

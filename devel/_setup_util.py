@@ -268,11 +268,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-<<<<<<< HEAD
-            CMAKE_PREFIX_PATH = r'/home/cona2/catkin_ws/devel;/opt/ros/noetic'.split(';')
-=======
             CMAKE_PREFIX_PATH = r'/opt/ros/noetic'.split(';')
->>>>>>> 6ef40e22e227413384e8b51b55965cae101f30bb
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cona/ROS_/src/opencv_pc/src/cam_sub.cpp" "/home/cona/ROS_/build/opencv_pc/CMakeFiles/opencv_sub.dir/src/cam_sub.cpp.o"
+  "/home/cona2/catkin_ws/src/opencv_pc/src/cam_sub.cpp" "/home/cona2/catkin_ws/build/opencv_pc/CMakeFiles/opencv_sub.dir/src/cam_sub.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

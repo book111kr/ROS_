@@ -1,4 +1,4 @@
-prefix=/home/cona/ROS_/install
+prefix=/home/cona2/catkin_ws/install
 
 Name: opencv_pc
 Description: Description of opencv_pc

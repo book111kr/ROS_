@@ -1,99 +1,84 @@
-
 #include <ros/ros.h>
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <vector>
 #include <random>
+#include <ctime>
 
-void draw_random_points(cv::Mat& image, int num_points) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::normal_distribution<double> dis_x(500, 700); 
-    std::normal_distribution<double> dis_y(500, 700); 
-   
-    for (int i = 0; i < num_points; i++) {
-        int x = (int) dis_x(gen);
-        int y = (int) dis_y(gen);
-        // int y = (int) (dis_y(gen) * 100 + 500);
-        cv::circle(image, cv::Point(x, y), 1, cv::Scalar(255, 255, 255), -1);
+
+std::vector<cv::Point2f> random_points(cv::Mat& image, int n) {
+    std::vector<cv::Point2f> points;
+    std::mt19937 rng(std::time(nullptr));
+    std::uniform_int_distribution<int> uni_x(0, 999);
+    std::uniform_int_distribution<int> uni_y(400, 600);
+    for (int i = 0; i < n; i++) {
+        cv::Point2f p(uni_x(rng), uni_y(rng));
+        points.push_back(p);
     }
-}                             
-// 특정 점과 선사이의 거리 계산 함수
-float distance(float x, float y, float vx, float vy, float x0, float y0) {
-    float dx = x - x0;
-    float dy = y - y0;
-    return std::fabs(dx*vy - dy*vx) / std::sqrt(vx*vx + vy*vy);
+    for (int i = 0; i < points.size(); i++) {
+        cv::circle(image, points[i], 3, cv::Scalar(255, 255, 255), -1);
+    }
+    return points;
 }
-
-// 두 점 사이의 거리 계산 함수
-float distance(float x1, float y1, float x2, float y2) {
-    float dx = x2 - x1;
-    float dy = y2 - y1;
-    return std::sqrt(dx*dx + dy*dy);
+float Point_line_distance(cv::Point2f target_p, cv::Point2f select_p1, cv::Point2f select_p2) {
+    float a = (select_p2.y - select_p1.y) / (select_p2.x - select_p1.x);
+    float b = select_p1.y - a * select_p1.x;
+    return std::fabs(a * target_p.x - target_p.y + b) / std::sqrt(a * a + 1);
 }
-
-std::vector<float> ransac_line_fitting(std::vector<float> points, cv::Mat& image, float threshold, int H) {
-    cv::Mat a;
+std::vector<cv::Point2f> ransac_line_fitting(cv::Mat& image, std::vector<cv::Point2f> points, float threshold) {
     int num_points = points.size();
-    int best_support = 0;
-    std::vector<float> best_line;
+    int Max_inlier = 0;
+    int count = 0;
+    int N = 100;
+    std::vector<cv::Point2f> best_points;
     std::srand(std::time(nullptr));
-
-    for (int k = 0; k < H; k++) {
+    for (int k = 0; k < N; k++) {
+        count++;
         int i1 = std::rand() % num_points;
         int i2 = std::rand() % num_points;
 
         while (i1 == i2) i2 = std::rand() % num_points;
+        
+       
+        cv::Point2f select_p1 = points[i1];
+        cv::Point2f select_p2 = points[i2];
+        
+        int inlier = 0;
+        for(int i = 0; i < num_points; i++)
+        {   
 
-        float x1 = points[i1];
-        float y1 = points[i1+1];
-        float x2 = points[i2];
-        float y2 = points[i2+1];
-        float vx = x2 - x1;
-        float vy = y2 - y1;
-        float norm = std::sqrt(vx*vx + vy*vy);
-        vx /= norm;
-        vy /= norm;
-
-        int support = 0;
-
-        for (int i = 0; i < num_points; i++){
-            float x = points[i];
-            float y = points[i + 1];
-            float d = distance(x, y, vx, vy, x1, x2);
-
-            if (d < threshold) support++;
-        }
-
-        if (support > best_support){
-            best_support = support;
-            best_line = {vx, vy, x1, y1};
-
-            for (int i = 0; i < num_points; i++) {
-                float x = points[i];
-                float y = points[i+1];
-                float d = distance(x, y, vx, vy, x1, y1);
-                if (d < threshold) {
-                    points[i] = x1 + (x - x1)*vx + (y - y1)*vy;
-                    points[i+1] = y1 + (x - x1)*vy - (y - y1)*vx;
-                }
-                cv::circle(image, cv::Point(x, y), 1, cv::Scalar(0, 0, 255), -1);   
+            cv::Point2f target_p = points[i];
+            float d = Point_line_distance(target_p, select_p1, select_p2);
+            if (d < threshold) {
+                inlier++;
+            }
+            if((count == 100) && (Max_inlier > inlier)){
+                cv::circle(image, target_p, 3, cv::Scalar(255, 0, 0), -1);
             }
         }
-    }
-    return a;
+        if (inlier > Max_inlier) {
+            Max_inlier = inlier;
+            best_points = {select_p1, select_p2};
    
+        }
+        
+    }
+    cv::Point2f best_pt1 = best_points[0];
+    cv::Point2f best_pt2 = best_points[1];
+    std::vector<cv::Point2f> line = {best_pt1, best_pt2};
+    
+    return line;
 }
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
     ros::init(argc, argv, "RANSAC");
-    
-    cv::Mat image(1000, 1000, CV_8UC3, cv::Scalar(0, 0, 0));
-    
-    draw_random_points(image, 150);
-    
-    cv::imshow("Random Points", image);
+    cv::Mat image (1000, 1000, CV_8UC3, cv::Scalar(0, 0, 0));
+    std::vector<cv::Point2f> points = random_points(image, 200);
+    std::vector<cv::Point2f> line = ransac_line_fitting(image, points, 50);
+    cv::line(image, line[0], line[1], cv::Scalar(0, 0, 255), 2);
+    cv::imshow("image", image);
     cv::waitKey(0);
-    cv::destroyWindow("Random Points");
     ros::spin();
+    cv::destroyWindow("RANSAC");
     return 0;
 }

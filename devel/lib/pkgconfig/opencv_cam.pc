@@ -1,4 +1,4 @@
-prefix=/home/cona/ROS_/devel
+prefix=/home/cona2/catkin_ws/devel
 
 Name: opencv_cam
 Description: Description of opencv_cam
