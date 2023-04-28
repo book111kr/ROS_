@@ -4,9 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/eigen3",
                 "/opt/ros/noetic/include",
-                "/usr/include/opencv4"
+                "/usr/include/opencv4",
+                "/home/cona2/catkin_ws/devel/include"
+                
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

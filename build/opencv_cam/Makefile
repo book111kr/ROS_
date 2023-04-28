@@ -56,18 +56,6 @@ CMAKE_BINARY_DIR = /home/cona2/catkin_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -89,6 +77,18 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -168,6 +168,96 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+opencv_cam/CMakeFiles/client.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/client.dir/rule
+.PHONY : opencv_cam/CMakeFiles/client.dir/rule
+
+# Convenience name for target.
+client: opencv_cam/CMakeFiles/client.dir/rule
+
+.PHONY : client
+
+# fast build rule for target.
+client/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/client.dir/build.make opencv_cam/CMakeFiles/client.dir/build
+.PHONY : client/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/k_means.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/k_means.dir/rule
+.PHONY : opencv_cam/CMakeFiles/k_means.dir/rule
+
+# Convenience name for target.
+k_means: opencv_cam/CMakeFiles/k_means.dir/rule
+
+.PHONY : k_means
+
+# fast build rule for target.
+k_means/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/k_means.dir/build.make opencv_cam/CMakeFiles/k_means.dir/build
+.PHONY : k_means/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_genpy.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_genpy.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_genpy.dir/rule
+
+# Convenience name for target.
+opencv_cam_genpy: opencv_cam/CMakeFiles/opencv_cam_genpy.dir/rule
+
+.PHONY : opencv_cam_genpy
+
+# fast build rule for target.
+opencv_cam_genpy/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_genpy.dir/build.make opencv_cam/CMakeFiles/opencv_cam_genpy.dir/build
+.PHONY : opencv_cam_genpy/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_generate_messages_nodejs.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_generate_messages_nodejs.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+opencv_cam_generate_messages_nodejs: opencv_cam/CMakeFiles/opencv_cam_generate_messages_nodejs.dir/rule
+
+.PHONY : opencv_cam_generate_messages_nodejs
+
+# fast build rule for target.
+opencv_cam_generate_messages_nodejs/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_generate_messages_nodejs.dir/build.make opencv_cam/CMakeFiles/opencv_cam_generate_messages_nodejs.dir/build
+.PHONY : opencv_cam_generate_messages_nodejs/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_geneus.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_geneus.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_geneus.dir/rule
+
+# Convenience name for target.
+opencv_cam_geneus: opencv_cam/CMakeFiles/opencv_cam_geneus.dir/rule
+
+.PHONY : opencv_cam_geneus
+
+# fast build rule for target.
+opencv_cam_geneus/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_geneus.dir/build.make opencv_cam/CMakeFiles/opencv_cam_geneus.dir/build
+.PHONY : opencv_cam_geneus/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_generate_messages_eus.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_generate_messages_eus.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+opencv_cam_generate_messages_eus: opencv_cam/CMakeFiles/opencv_cam_generate_messages_eus.dir/rule
+
+.PHONY : opencv_cam_generate_messages_eus
+
+# fast build rule for target.
+opencv_cam_generate_messages_eus/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_generate_messages_eus.dir/build.make opencv_cam/CMakeFiles/opencv_cam_generate_messages_eus.dir/build
+.PHONY : opencv_cam_generate_messages_eus/fast
+
+# Convenience name for target.
 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
 	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
@@ -228,6 +318,21 @@ geometry_msgs_generate_messages_nodejs/fast:
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_generate_messages_py.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_generate_messages_py.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_generate_messages_py.dir/rule
+
+# Convenience name for target.
+opencv_cam_generate_messages_py: opencv_cam/CMakeFiles/opencv_cam_generate_messages_py.dir/rule
+
+.PHONY : opencv_cam_generate_messages_py
+
+# fast build rule for target.
+opencv_cam_generate_messages_py/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_generate_messages_py.dir/build.make opencv_cam/CMakeFiles/opencv_cam_generate_messages_py.dir/build
+.PHONY : opencv_cam_generate_messages_py/fast
+
+# Convenience name for target.
 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
 	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
@@ -271,6 +376,36 @@ std_msgs_generate_messages_cpp: opencv_cam/CMakeFiles/std_msgs_generate_messages
 std_msgs_generate_messages_cpp/fast:
 	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make opencv_cam/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_cpp: opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_generate_messages_lisp.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_generate_messages_lisp.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+opencv_cam_generate_messages_lisp: opencv_cam/CMakeFiles/opencv_cam_generate_messages_lisp.dir/rule
+
+.PHONY : opencv_cam_generate_messages_lisp
+
+# fast build rule for target.
+opencv_cam_generate_messages_lisp/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_generate_messages_lisp.dir/build.make opencv_cam/CMakeFiles/opencv_cam_generate_messages_lisp.dir/build
+.PHONY : opencv_cam_generate_messages_lisp/fast
 
 # Convenience name for target.
 opencv_cam/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
@@ -333,19 +468,49 @@ roscpp_generate_messages_py/fast:
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
-opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+opencv_cam/CMakeFiles/opencv_cam_gencpp.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_gencpp.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_gencpp.dir/rule
 
 # Convenience name for target.
-std_msgs_generate_messages_lisp: opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+opencv_cam_gencpp: opencv_cam/CMakeFiles/opencv_cam_gencpp.dir/rule
 
-.PHONY : std_msgs_generate_messages_lisp
+.PHONY : opencv_cam_gencpp
 
 # fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
+opencv_cam_gencpp/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_gencpp.dir/build.make opencv_cam/CMakeFiles/opencv_cam_gencpp.dir/build
+.PHONY : opencv_cam_gencpp/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_generate_messages_cpp.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_generate_messages_cpp.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+opencv_cam_generate_messages_cpp: opencv_cam/CMakeFiles/opencv_cam_generate_messages_cpp.dir/rule
+
+.PHONY : opencv_cam_generate_messages_cpp
+
+# fast build rule for target.
+opencv_cam_generate_messages_cpp/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_generate_messages_cpp.dir/build.make opencv_cam/CMakeFiles/opencv_cam_generate_messages_cpp.dir/build
+.PHONY : opencv_cam_generate_messages_cpp/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_genlisp.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_genlisp.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_genlisp.dir/rule
+
+# Convenience name for target.
+opencv_cam_genlisp: opencv_cam/CMakeFiles/opencv_cam_genlisp.dir/rule
+
+.PHONY : opencv_cam_genlisp
+
+# fast build rule for target.
+opencv_cam_genlisp/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_genlisp.dir/build.make opencv_cam/CMakeFiles/opencv_cam_genlisp.dir/build
+.PHONY : opencv_cam_genlisp/fast
 
 # Convenience name for target.
 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
@@ -453,19 +618,34 @@ geometry_msgs_generate_messages_py/fast:
 .PHONY : geometry_msgs_generate_messages_py/fast
 
 # Convenience name for target.
-opencv_cam/CMakeFiles/RANSAC.dir/rule:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/RANSAC.dir/rule
-.PHONY : opencv_cam/CMakeFiles/RANSAC.dir/rule
+opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-RANSAC: opencv_cam/CMakeFiles/RANSAC.dir/rule
+roscpp_generate_messages_eus: opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
-.PHONY : RANSAC
+.PHONY : roscpp_generate_messages_eus
 
 # fast build rule for target.
-RANSAC/fast:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/RANSAC.dir/build.make opencv_cam/CMakeFiles/RANSAC.dir/build
-.PHONY : RANSAC/fast
+roscpp_generate_messages_eus/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/build.make opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_generate_messages.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_generate_messages.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_generate_messages.dir/rule
+
+# Convenience name for target.
+opencv_cam_generate_messages: opencv_cam/CMakeFiles/opencv_cam_generate_messages.dir/rule
+
+.PHONY : opencv_cam_generate_messages
+
+# fast build rule for target.
+opencv_cam_generate_messages/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_generate_messages.dir/build.make opencv_cam/CMakeFiles/opencv_cam_generate_messages.dir/build
+.PHONY : opencv_cam_generate_messages/fast
 
 # Convenience name for target.
 opencv_cam/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
@@ -481,6 +661,21 @@ std_msgs_generate_messages_py: opencv_cam/CMakeFiles/std_msgs_generate_messages_
 std_msgs_generate_messages_py/fast:
 	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/std_msgs_generate_messages_py.dir/build.make opencv_cam/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+opencv_cam/CMakeFiles/opencv_cam_gennodejs.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/opencv_cam_gennodejs.dir/rule
+.PHONY : opencv_cam/CMakeFiles/opencv_cam_gennodejs.dir/rule
+
+# Convenience name for target.
+opencv_cam_gennodejs: opencv_cam/CMakeFiles/opencv_cam_gennodejs.dir/rule
+
+.PHONY : opencv_cam_gennodejs
+
+# fast build rule for target.
+opencv_cam_gennodejs/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/opencv_cam_gennodejs.dir/build.make opencv_cam/CMakeFiles/opencv_cam_gennodejs.dir/build
+.PHONY : opencv_cam_gennodejs/fast
 
 # Convenience name for target.
 opencv_cam/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
@@ -528,61 +723,88 @@ geometry_msgs_generate_messages_eus/fast:
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+.PHONY : opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+std_msgs_generate_messages_lisp: opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_cpp
+.PHONY : std_msgs_generate_messages_lisp
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make opencv_cam/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+std_msgs_generate_messages_lisp/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make opencv_cam/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+.PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+opencv_cam/CMakeFiles/_opencv_cam_generate_messages_check_deps_clu.dir/rule:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 opencv_cam/CMakeFiles/_opencv_cam_generate_messages_check_deps_clu.dir/rule
+.PHONY : opencv_cam/CMakeFiles/_opencv_cam_generate_messages_check_deps_clu.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_eus: opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+_opencv_cam_generate_messages_check_deps_clu: opencv_cam/CMakeFiles/_opencv_cam_generate_messages_check_deps_clu.dir/rule
 
-.PHONY : roscpp_generate_messages_eus
+.PHONY : _opencv_cam_generate_messages_check_deps_clu
 
 # fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/build.make opencv_cam/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
+_opencv_cam_generate_messages_check_deps_clu/fast:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/_opencv_cam_generate_messages_check_deps_clu.dir/build.make opencv_cam/CMakeFiles/_opencv_cam_generate_messages_check_deps_clu.dir/build
+.PHONY : _opencv_cam_generate_messages_check_deps_clu/fast
 
-src/RANSAC.o: src/RANSAC.cpp.o
+src/client.o: src/client.cpp.o
 
-.PHONY : src/RANSAC.o
+.PHONY : src/client.o
 
 # target to build an object file
-src/RANSAC.cpp.o:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/RANSAC.dir/build.make opencv_cam/CMakeFiles/RANSAC.dir/src/RANSAC.cpp.o
-.PHONY : src/RANSAC.cpp.o
+src/client.cpp.o:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/client.dir/build.make opencv_cam/CMakeFiles/client.dir/src/client.cpp.o
+.PHONY : src/client.cpp.o
 
-src/RANSAC.i: src/RANSAC.cpp.i
+src/client.i: src/client.cpp.i
 
-.PHONY : src/RANSAC.i
+.PHONY : src/client.i
 
 # target to preprocess a source file
-src/RANSAC.cpp.i:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/RANSAC.dir/build.make opencv_cam/CMakeFiles/RANSAC.dir/src/RANSAC.cpp.i
-.PHONY : src/RANSAC.cpp.i
+src/client.cpp.i:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/client.dir/build.make opencv_cam/CMakeFiles/client.dir/src/client.cpp.i
+.PHONY : src/client.cpp.i
 
-src/RANSAC.s: src/RANSAC.cpp.s
+src/client.s: src/client.cpp.s
 
-.PHONY : src/RANSAC.s
+.PHONY : src/client.s
 
 # target to generate assembly for a file
-src/RANSAC.cpp.s:
-	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/RANSAC.dir/build.make opencv_cam/CMakeFiles/RANSAC.dir/src/RANSAC.cpp.s
-.PHONY : src/RANSAC.cpp.s
+src/client.cpp.s:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/client.dir/build.make opencv_cam/CMakeFiles/client.dir/src/client.cpp.s
+.PHONY : src/client.cpp.s
+
+src/test.o: src/test.cpp.o
+
+.PHONY : src/test.o
+
+# target to build an object file
+src/test.cpp.o:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/k_means.dir/build.make opencv_cam/CMakeFiles/k_means.dir/src/test.cpp.o
+.PHONY : src/test.cpp.o
+
+src/test.i: src/test.cpp.i
+
+.PHONY : src/test.i
+
+# target to preprocess a source file
+src/test.cpp.i:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/k_means.dir/build.make opencv_cam/CMakeFiles/k_means.dir/src/test.cpp.i
+.PHONY : src/test.cpp.i
+
+src/test.s: src/test.cpp.s
+
+.PHONY : src/test.s
+
+# target to generate assembly for a file
+src/test.cpp.s:
+	cd /home/cona2/catkin_ws/build && $(MAKE) -f opencv_cam/CMakeFiles/k_means.dir/build.make opencv_cam/CMakeFiles/k_means.dir/src/test.cpp.s
+.PHONY : src/test.cpp.s
 
 # Help Target
 help:
@@ -590,22 +812,35 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/strip"
 	@echo "... install"
+	@echo "... client"
+	@echo "... k_means"
 	@echo "... list_install_components"
+	@echo "... opencv_cam_genpy"
+	@echo "... opencv_cam_generate_messages_nodejs"
+	@echo "... opencv_cam_geneus"
+	@echo "... install/strip"
+	@echo "... opencv_cam_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_nodejs"
+	@echo "... opencv_cam_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... install/local"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... test"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... opencv_cam_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_py"
-	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... edit_cache"
+	@echo "... opencv_cam_gencpp"
+	@echo "... opencv_cam_generate_messages_cpp"
+	@echo "... opencv_cam_genlisp"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_cpp"
@@ -613,19 +848,22 @@ help:
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_py"
-	@echo "... RANSAC"
+	@echo "... rebuild_cache"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... opencv_cam_generate_messages"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... opencv_cam_gennodejs"
 	@echo "... sensor_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... test"
-	@echo "... edit_cache"
-	@echo "... roscpp_generate_messages_eus"
-	@echo "... rebuild_cache"
-	@echo "... src/RANSAC.o"
-	@echo "... src/RANSAC.i"
-	@echo "... src/RANSAC.s"
+	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... _opencv_cam_generate_messages_check_deps_clu"
+	@echo "... src/client.o"
+	@echo "... src/client.i"
+	@echo "... src/client.s"
+	@echo "... src/test.o"
+	@echo "... src/test.i"
+	@echo "... src/test.s"
 .PHONY : help
 
 

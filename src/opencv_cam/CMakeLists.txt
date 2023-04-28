@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   image_transport
   cv_bridge
+  message_generation
+  message_runtime
 )
 
 find_package( OpenCV REQUIRED )
@@ -58,11 +60,10 @@ find_package( OpenCV REQUIRED )
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  clu.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -72,10 +73,7 @@ find_package( OpenCV REQUIRED )
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(DEPENDENCIES std_msgs)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -109,7 +107,7 @@ find_package( OpenCV REQUIRED )
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES opencv_cam
-#  CATKIN_DEPENDS roscpp cv_birdge
+#  CATKIN_DEPENDS roscpp cv_birdge std_msgs sensor_msgs image_transport message_generation message_runtime
 #  DEPENDS system_lib
 )
 
@@ -120,7 +118,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
 )
@@ -130,8 +128,17 @@ include_directories(
 #   src/${PROJECT_NAME}/opencv_cam.cpp
 # )
 
-add_executable(RANSAC src/RANSAC.cpp)
-target_link_libraries(RANSAC ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+# add_executable(k_means src/k-means.cpp)
+# target_link_libraries(k_means ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+
+add_executable(k_means src/test.cpp)
+target_link_libraries(k_means ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+# add_dependencies(test.cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+
+add_executable(client src/client.cpp)
+target_link_libraries(client ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+# add_dependencies(client.cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure

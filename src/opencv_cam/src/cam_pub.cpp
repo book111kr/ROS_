@@ -5,7 +5,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <sensor_msgs/Image.h>
 
-
 int main(int argc, char** argv)
 {
 
