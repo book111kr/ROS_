@@ -20,37 +20,37 @@
 
 (defclass opencv_cam::cluRequest
   :super ros::object
-  :slots (_k ))
+  :slots (_my_number ))
 
 (defmethod opencv_cam::cluRequest
   (:init
    (&key
-    ((:k __k) 0)
+    ((:my_number __my_number) 0)
     )
    (send-super :init)
-   (setq _k (round __k))
+   (setq _my_number (round __my_number))
    self)
-  (:k
-   (&optional __k)
-   (if __k (setq _k __k)) _k)
+  (:my_number
+   (&optional __my_number)
+   (if __my_number (setq _my_number __my_number)) _my_number)
   (:serialization-length
    ()
    (+
-    ;; int32 _k
+    ;; int32 _my_number
     4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32 _k
-       (write-long _k s)
+     ;; int32 _my_number
+       (write-long _my_number s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32 _k
-     (setq _k (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; int32 _my_number
+     (setq _my_number (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;;
    self)
   )
@@ -96,7 +96,7 @@
   :super ros::object
   :slots ())
 
-(setf (get opencv_cam::clu :md5sum-) "6c4229b893df484eaff1a08b305984ad")
+(setf (get opencv_cam::clu :md5sum-) "51b41483a7964797e1bc083c1c92baf4")
 (setf (get opencv_cam::clu :datatype-) "opencv_cam/clu")
 (setf (get opencv_cam::clu :request) opencv_cam::cluRequest)
 (setf (get opencv_cam::clu :response) opencv_cam::cluResponse)
@@ -104,24 +104,24 @@
 (defmethod opencv_cam::cluRequest
   (:response () (instance opencv_cam::cluResponse :init)))
 
-(setf (get opencv_cam::cluRequest :md5sum-) "6c4229b893df484eaff1a08b305984ad")
+(setf (get opencv_cam::cluRequest :md5sum-) "51b41483a7964797e1bc083c1c92baf4")
 (setf (get opencv_cam::cluRequest :datatype-) "opencv_cam/cluRequest")
 (setf (get opencv_cam::cluRequest :definition-)
-      "int32 k
+      "int32 my_number
 ---
 int32 result
 ")
 
-(setf (get opencv_cam::cluResponse :md5sum-) "6c4229b893df484eaff1a08b305984ad")
+(setf (get opencv_cam::cluResponse :md5sum-) "51b41483a7964797e1bc083c1c92baf4")
 (setf (get opencv_cam::cluResponse :datatype-) "opencv_cam/cluResponse")
 (setf (get opencv_cam::cluResponse :definition-)
-      "int32 k
+      "int32 my_number
 ---
 int32 result
 ")
 
 
 
-(provide :opencv_cam/clu "6c4229b893df484eaff1a08b305984ad")
+(provide :opencv_cam/clu "51b41483a7964797e1bc083c1c92baf4")
 
 

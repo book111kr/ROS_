@@ -24,17 +24,17 @@ struct cluRequest_
   typedef cluRequest_<ContainerAllocator> Type;
 
   cluRequest_()
-    : k(0)  {
+    : my_number(0)  {
     }
   cluRequest_(const ContainerAllocator& _alloc)
-    : k(0)  {
+    : my_number(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int32_t _k_type;
-  _k_type k;
+   typedef int32_t _my_number_type;
+  _my_number_type my_number;
 
 
 
@@ -65,7 +65,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::opencv_cam::cluRequest_<ContainerAllocator1> & lhs, const ::opencv_cam::cluRequest_<ContainerAllocator2> & rhs)
 {
-  return lhs.k == rhs.k;
+  return lhs.my_number == rhs.my_number;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +122,12 @@ struct MD5Sum< ::opencv_cam::cluRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "f099228d78e41d5bc9bf364a1ccb3dec";
+    return "b423d220a73fa08d9f3993711323aaee";
   }
 
   static const char* value(const ::opencv_cam::cluRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xf099228d78e41d5bULL;
-  static const uint64_t static_value2 = 0xc9bf364a1ccb3decULL;
+  static const uint64_t static_value1 = 0xb423d220a73fa08dULL;
+  static const uint64_t static_value2 = 0x9f3993711323aaeeULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +146,7 @@ struct Definition< ::opencv_cam::cluRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32 k\n"
+    return "int32 my_number\n"
 ;
   }
 
@@ -165,7 +165,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.k);
+      stream.next(m.my_number);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -184,8 +184,8 @@ struct Printer< ::opencv_cam::cluRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::opencv_cam::cluRequest_<ContainerAllocator>& v)
   {
-    s << indent << "k: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.k);
+    s << indent << "my_number: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.my_number);
   }
 };
 

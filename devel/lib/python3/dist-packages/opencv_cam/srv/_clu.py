@@ -8,12 +8,12 @@ import struct
 
 
 class cluRequest(genpy.Message):
-  _md5sum = "f099228d78e41d5bc9bf364a1ccb3dec"
+  _md5sum = "b423d220a73fa08d9f3993711323aaee"
   _type = "opencv_cam/cluRequest"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int32 k
+  _full_text = """int32 my_number
 """
-  __slots__ = ['k']
+  __slots__ = ['my_number']
   _slot_types = ['int32']
 
   def __init__(self, *args, **kwds):
@@ -24,7 +24,7 @@ class cluRequest(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       k
+       my_number
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,10 +33,10 @@ class cluRequest(genpy.Message):
     if args or kwds:
       super(cluRequest, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.k is None:
-        self.k = 0
+      if self.my_number is None:
+        self.my_number = 0
     else:
-      self.k = 0
+      self.my_number = 0
 
   def _get_types(self):
     """
@@ -50,7 +50,7 @@ class cluRequest(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.k
+      _x = self.my_number
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -66,7 +66,7 @@ class cluRequest(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.k,) = _get_struct_i().unpack(str[start:end])
+      (self.my_number,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -79,7 +79,7 @@ class cluRequest(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.k
+      _x = self.my_number
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -96,7 +96,7 @@ class cluRequest(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.k,) = _get_struct_i().unpack(str[start:end])
+      (self.my_number,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -226,6 +226,6 @@ def _get_struct_i():
     return _struct_i
 class clu(object):
   _type          = 'opencv_cam/clu'
-  _md5sum = '6c4229b893df484eaff1a08b305984ad'
+  _md5sum = '51b41483a7964797e1bc083c1c92baf4'
   _request_class  = cluRequest
   _response_class = cluResponse

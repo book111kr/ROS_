@@ -8,20 +8,21 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "client");
     ros::NodeHandle nh;
     ros::ServiceClient client = nh.serviceClient<opencv_cam::clu>("k_means");
+    int number;
+    std::cout << "number k :";
+    std::cin >> number;
+    
     opencv_cam::clu srv;
-    int k = 0;
-    std::cout << "Enter the value of k: ";
-    std::cin >> k;
-    srv.request.k = k;
-    if (client.call(srv))
-    {
-        ROS_INFO("send srv, srv.Request.k : %d", (int)srv.request.k);
-        ROS_INFO("receive srv, srv.Response.result : %d", (int)srv.response.result);
+    srv.request.my_number = number;
+
+    if (client.call(srv)){
+        ROS_INFO("Num k: %d", (int)srv.response.result);
     }
     else
     {
-        ROS_ERROR("Failed to call service");
+        ROS_ERROR("fail");
         return 1;
     }
+    
     return 0;
 }

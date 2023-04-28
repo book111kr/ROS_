@@ -21,22 +21,22 @@ class cluRequest {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.k = null;
+      this.my_number = null;
     }
     else {
-      if (initObj.hasOwnProperty('k')) {
-        this.k = initObj.k
+      if (initObj.hasOwnProperty('my_number')) {
+        this.my_number = initObj.my_number
       }
       else {
-        this.k = 0;
+        this.my_number = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type cluRequest
-    // Serialize message field [k]
-    bufferOffset = _serializer.int32(obj.k, buffer, bufferOffset);
+    // Serialize message field [my_number]
+    bufferOffset = _serializer.int32(obj.my_number, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -44,8 +44,8 @@ class cluRequest {
     //deserializes a message object of type cluRequest
     let len;
     let data = new cluRequest(null);
-    // Deserialize message field [k]
-    data.k = _deserializer.int32(buffer, bufferOffset);
+    // Deserialize message field [my_number]
+    data.my_number = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
@@ -60,13 +60,13 @@ class cluRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'f099228d78e41d5bc9bf364a1ccb3dec';
+    return 'b423d220a73fa08d9f3993711323aaee';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int32 k
+    int32 my_number
     
     `;
   }
@@ -77,11 +77,11 @@ class cluRequest {
       msg = {};
     }
     const resolved = new cluRequest(null);
-    if (msg.k !== undefined) {
-      resolved.k = msg.k;
+    if (msg.my_number !== undefined) {
+      resolved.my_number = msg.my_number;
     }
     else {
-      resolved.k = 0
+      resolved.my_number = 0
     }
 
     return resolved;
@@ -162,6 +162,6 @@ class cluResponse {
 module.exports = {
   Request: cluRequest,
   Response: cluResponse,
-  md5sum() { return '6c4229b893df484eaff1a08b305984ad'; },
+  md5sum() { return '51b41483a7964797e1bc083c1c92baf4'; },
   datatype() { return 'opencv_cam/clu'; }
 };

@@ -1,6 +1,6 @@
 (cl:in-package opencv_cam-srv)
-(cl:export '(K-VAL
-          K
+(cl:export '(MY_NUMBER-VAL
+          MY_NUMBER
           RESULT-VAL
           RESULT
 ))

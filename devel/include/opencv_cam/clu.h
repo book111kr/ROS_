@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::opencv_cam::clu > {
   static const char* value()
   {
-    return "6c4229b893df484eaff1a08b305984ad";
+    return "51b41483a7964797e1bc083c1c92baf4";
   }
 
   static const char* value(const ::opencv_cam::clu&) { return value(); }
